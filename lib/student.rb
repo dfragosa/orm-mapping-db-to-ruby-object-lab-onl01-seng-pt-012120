@@ -47,20 +47,24 @@ class Student
     sql = <<-SQL
     SELECT grade, name FROM students
     WHERE grade <= 11;
-   
-    SQL
+     SQL
     DB[:conn].execute(sql).map do |row|
       self.new_from_db(row)
     end 
   end
   
+  def self.first_X_students_in_grade_10(students)
+    sql = <<-SQL
+      SELECT COUNT (name)  FROM students
+      
+    SQL 
+  end 
   
   def save
     sql = <<-SQL
       INSERT INTO students (name, grade) 
       VALUES (?, ?)
     SQL
-
     DB[:conn].execute(sql, self.name, self.grade)
   end
   
