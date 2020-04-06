@@ -56,7 +56,8 @@ class Student
   def self.first_X_students_in_grade_10(students)
     sql = <<-SQL
       SELECT name COUNT (name)  AS num_of_students
-      FROM students;
+      FROM students
+      WHERE grade == 10;
       SQL
       DB[:conn].execute(sql, name).map do |row|
         self.new_from_db(row)
